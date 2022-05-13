@@ -1,2 +1,3 @@
+from AssymEnc.funcs import *
 if __name__ == '__main__':
-    print("Hello Nick")
+    printGreetings("Nick")
