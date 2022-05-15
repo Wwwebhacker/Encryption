@@ -1,3 +1,5 @@
-from AssymEnc.funcs import *
+
+from SymmetricEnc.CBC_AES import *
 if __name__ == '__main__':
-    printGreetings("Nick")
+    key=encrypt("FileToEncrypt/2023-BMW-7.jpg")
+    decrypt(key,"EncryptedFile/2023-BMW-7.json")
