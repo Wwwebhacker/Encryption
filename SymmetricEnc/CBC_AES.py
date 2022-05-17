@@ -11,6 +11,7 @@ def encrypt(dir: str):
         data = file
         key = get_random_bytes(16)
         cipher = AES.new(key, AES.MODE_CBC)
+
         ct_bytes = cipher.encrypt(pad(data.read(), AES.block_size))
 
         iv = b64encode(cipher.iv).decode('utf-8')
@@ -21,6 +22,7 @@ def encrypt(dir: str):
         result = json.dumps({'file_extension': file_extension, 'iv': iv, 'ciphertext': ct})
         with open('EncryptedFile/' + file_name + '.json', 'w') as c_file:
             c_file.write(result)
+
 
     return key
 
