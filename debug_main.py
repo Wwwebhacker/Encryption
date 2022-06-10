@@ -12,7 +12,7 @@ def main():
         private_key = RSA.import_key(f.read())
         pub_key=private_key.public_key()
         foreign_public_key=pub_key.exportKey()
-        encrypt_aes("FileToEncrypt/2023-BMW-7.jpg",foreign_public_key,AES.MODE_CBC)
+        encrypt_aes("FileToEncrypt/2023-BMW-7.jpg",foreign_public_key, AES.MODE_CFB)
 
     decrypt_aes("FileToEncrypt/2023-BMW-7.json")
 
