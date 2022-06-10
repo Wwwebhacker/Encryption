@@ -44,13 +44,16 @@ if __name__ == '__main__':
         key = RSA.import_key(f.read())
         f.close()
         key = key.public_key().exportKey()
-        txt_public_key.delete("1.0", tk.END)
-        txt_public_key.insert("1.0", key)
+        #txt_public_key.delete("1.0", tk.END)
+        #txt_public_key.insert("1.0", key)
+        window.clipboard_clear()
+        window.clipboard_append(key)
+        window.update()
 
     def process_file():
         refresh_text_input()
         if var_action.get() == 1:
-            if encrypted_file_path!= "":
+            if encrypted_file_path != "":
                 res = decrypt(encrypted_file_path)
                 if res:
                     tk.messagebox.showinfo("Decryption result", "You have decrypted selected file into the same folder where original was.")
@@ -94,13 +97,14 @@ if __name__ == '__main__':
     #decrypt(encrypted_file_path)
 
     window = tk.Tk()
+    window.geometry("700x400")
     window.title("File encryption")
 
-    btn_public_key = tk.Button(text="Show your public key: ", command = update_text_field)
-    txt_public_key = tk.Text(width=75, height=10)
+    btn_public_key = tk.Button(text="Copy your public key to clipboard", command = update_text_field)
+    #txt_public_key = tk.Text(width=75, height=10)
     update_text_field()
     btn_public_key.pack()
-    txt_public_key.pack()
+    #txt_public_key.pack()
 
     frm_central = tk.Frame()
     frm_central.pack()
