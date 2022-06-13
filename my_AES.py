@@ -33,9 +33,8 @@ def encrypt_aes(original_file_path: str, foreign_public_key: bytes, aes_symmetri
         ct = b64encode(ct_bytes).decode('utf-8')
 
         file_name = os.path.basename(original_file_path)
-        file_name, file_extension = os.path.splitext(file_name)
         result = json.dumps(
-            {'file_extension': file_extension, 'AES_MODE': aes_symmetric_mode, 'iv': iv, 'nonce': nonce,
+            {'AES_MODE': aes_symmetric_mode, 'iv': iv, 'nonce': nonce,
              'encrypted_sym_key': esk,
              'ciphertext': ct})
         with open(os.path.dirname(original_file_path) + '/' + file_name + '.json', 'w') as c_file:
@@ -70,10 +69,9 @@ def decrypt_aes(encrypted_file_path: str):
             pt = unpad(cipher.decrypt(ct), AES.block_size)
 
             file_name = os.path.basename(encrypted_file_path)
-            file_name, _ = os.path.splitext(file_name)
-            file_extension = b64['file_extension']
+            file_name_n_ext, _ = os.path.splitext(file_name)
 
-            with open(os.path.dirname(encrypted_file_path) + "/" + "decrypted_" + file_name + file_extension,
+            with open(os.path.dirname(encrypted_file_path) + "/" + "decrypted_" + file_name_n_ext,
                       "wb") as outFile:
                 outFile.write(pt)
 
